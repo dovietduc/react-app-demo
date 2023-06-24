@@ -1,15 +1,10 @@
 import {useEffect, useState} from 'react';
 
 
-function FormAdd({addDataInput, itemEditting, handleUpdateTodo}) {
-   
+function FormAdd({addDataInput, itemEditting, handleUpdateTodo, flagUpdate}) {
+   console.log('FormAdd', flagUpdate);
 
-    let idUpdate = 0;
-    if (itemEditting) {
-        idUpdate = itemEditting.id;
-    }
-
-    console.log('idUpdate', idUpdate);
+  
    
     const [valueInput, setValueInput] = useState('');
     function handleChange(event) {
@@ -27,7 +22,8 @@ function FormAdd({addDataInput, itemEditting, handleUpdateTodo}) {
         handleUpdateTodo(id, valueInput);
         setValueInput('');
 
-        // increment
+        // set state editing
+
     }
 
     useEffect(function() {
@@ -35,7 +31,7 @@ function FormAdd({addDataInput, itemEditting, handleUpdateTodo}) {
         if(itemEditting) {
             setValueInput(itemEditting.name);
         }
-    }, [idUpdate])
+    }, [flagUpdate])
 
 
     function renderButton() {

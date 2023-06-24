@@ -3,7 +3,7 @@ import FormAdd from './FormAdd';
 import data from './data';
 import { useState } from 'react';
 
-let idIndex = 2;
+let idIndex = 3;
 
 function TodoList() {
 
@@ -12,6 +12,9 @@ function TodoList() {
     const [todoList, setTodoList] = useState(data);
     // state management object is edditing
     const [itemEditting, setItemEditting] = useState('');
+    //state management update
+    const [flagUpdate, setFlagUpdate] = useState(true);
+
 
     const addDataInput = function(data) {
         const newData = [{id: idIndex, name: data}, ...todoList];
@@ -46,6 +49,7 @@ function TodoList() {
 
         // render app
         setTodoList(newStateUpdate);
+        setItemEditting('');
     }
 
 
@@ -54,6 +58,8 @@ function TodoList() {
         let itemList = todoList.map(function(todoItem) {
             return (
                 <ListItem 
+                    changeUpdateFlag={changeUpdateFlag}
+                    flagUpdate={flagUpdate}
                     showValueUpdate={showValueUpdate}
                     deleteData={deleteData}
                     key={todoItem.id} todoItem={todoItem}/>
@@ -63,6 +69,10 @@ function TodoList() {
         return itemList;
     }
 
+    const changeUpdateFlag = function(flag) {
+        setFlagUpdate(flag);
+    }
+
     
 
     return (
@@ -70,7 +80,7 @@ function TodoList() {
 
             {/* form add */}
             <FormAdd 
-               
+                flagUpdate={flagUpdate}
                 handleUpdateTodo={handleUpdateTodo}
                 itemEditting={itemEditting}
                 addDataInput={addDataInput}/>

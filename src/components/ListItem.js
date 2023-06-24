@@ -10,13 +10,14 @@
 // công việc update là click button update, tiến hành đưa value update đến input
 // 1. truyền id update từ con lên cha
 
-function ListItem({todoItem, deleteData, showValueUpdate}) {
-
+function ListItem({todoItem, deleteData, showValueUpdate, flagUpdate, changeUpdateFlag}) {
+    console.log('ListItem', flagUpdate);
     function handleDelete(id) {
         deleteData(id);
     }
 
     function handleUpdate(id) {
+        changeUpdateFlag(!flagUpdate);
         showValueUpdate(id);
     }
 
